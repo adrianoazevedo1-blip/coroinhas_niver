@@ -2,11 +2,19 @@ name: Aniversarios Coroinhas
 
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '0 12 * * *'      # 09:00 de Brasília (o GitHub usa horário UTC)
   workflow_dispatch:
     inputs:
+      listar_grupos:
+        description: 'Listar os grupos (para achar o ID)? escreva 1'
+        required: false
+        default: ''
+      teste_grupo:
+        description: 'Testar no GRUPO? escreva 1'
+        required: false
+        default: ''
       teste_numero:
-        description: 'Número para teste (opcional, ex.: 5561999999999)'
+        description: 'Testar no PRIVADO (número, ex.: 5561999999999)'
         required: false
         default: ''
 
@@ -25,7 +33,11 @@ jobs:
           EVOLUTION_URL: ${{ secrets.EVOLUTION_URL }}
           EVOLUTION_KEY: ${{ secrets.EVOLUTION_KEY }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE }}
+          GRUPO_ID: ${{ vars.GRUPO_ID }}
+          MODO: ${{ vars.MODO }}
           ENVIAR_PARA: ${{ vars.ENVIAR_PARA }}
           MENSAGEM: ${{ vars.MENSAGEM }}
+          LISTAR_GRUPOS: ${{ github.event.inputs.listar_grupos }}
+          TESTE_GRUPO: ${{ github.event.inputs.teste_grupo }}
           TESTE_NUMERO: ${{ github.event.inputs.teste_numero }}
           TZ: America/Sao_Paulo
