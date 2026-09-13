@@ -10,7 +10,7 @@ on:
         required: false
         default: ''
       teste_grupo:
-        description: 'Testar no GRUPO? escreva 1'
+        description: 'Testar nos GRUPOS? escreva 1'
         required: false
         default: ''
       teste_numero:
@@ -34,6 +34,7 @@ jobs:
           EVOLUTION_KEY: ${{ secrets.EVOLUTION_KEY }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE }}
           GRUPO_ID: ${{ vars.GRUPO_ID }}
+          GRUPO_ID2: ${{ vars.GRUPO_ID2 }}
           MODO: ${{ vars.MODO }}
           ENVIAR_PARA: ${{ vars.ENVIAR_PARA }}
           MENSAGEM: ${{ vars.MENSAGEM }}
