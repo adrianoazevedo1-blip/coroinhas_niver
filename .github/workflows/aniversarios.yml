@@ -1,0 +1,31 @@
+name: Aniversarios Coroinhas
+
+on:
+  schedule:
+    - cron: '0 12 * * *'      # 09:00 de Brasília (o GitHub usa horário UTC)
+  workflow_dispatch:          # permite rodar manualmente (botão "Run workflow")
+    inputs:
+      teste_numero:
+        description: 'Número para teste (opcional, ex.: 5561999999999)'
+        required: false
+        default: ''
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node index.js
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          EVOLUTION_URL: ${{ secrets.EVOLUTION_URL }}
+          EVOLUTION_KEY: ${{ secrets.EVOLUTION_KEY }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE }}
+          ENVIAR_PARA: ${{ vars.ENVIAR_PARA }}
+          MENSAGEM: ${{ vars.MENSAGEM }}
+          TESTE_NUMERO: ${{ github.event.inputs.teste_numero }}
+          TZ: America/Sao_Paulo
